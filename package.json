@@ -1,0 +1,53 @@
+{
+  "name": "openstad-component-openstad-component-choices-guide",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "babel-plugin-transform-postcss": "^0.3.0",
+    "core-js": "^3.4.1",
+    "css-loader": "^3.0.0",
+    "exports-loader": "^0.7.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "imports-loader": "^0.8.0",
+    "json-loader": "^0.5.7",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-proxy-loader": "^0.3.5",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amsterdam/openstad-component-openstad-component-choices-guide.git"
+  },
+  "author": "Niels Vegter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amsterdam/openstad-component-openstad-component-choices-guide/issues"
+  },
+  "homepage": "https://github.com/Amsterdam/openstad-component-openstad-component-choices-guide#readme",
+  "dependencies": {
+    "fingerprintjs2": "^2.1.0",
+    "merge": "^1.2.1",
+    "openstad-component": "git+ssh://git@github.com/Amsterdam/openstad-component.git",
+    "openstad-component-libs": "git+ssh://git@github.com/Amsterdam/openstad-component-forms.git"
+  }
+}
