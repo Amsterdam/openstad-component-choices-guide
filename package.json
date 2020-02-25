@@ -47,7 +47,8 @@
   "dependencies": {
     "fingerprintjs2": "^2.1.0",
     "merge": "^1.2.1",
-    "openstad-component": "git+ssh://git@github.com/Amsterdam/openstad-component.git",
-    "openstad-component-libs": "git+ssh://git@github.com/Amsterdam/openstad-component-forms.git"
+    "openstad-component": "git+ssh://git@github.com/Amsterdam/openstad-component.git#v0.0.1",
+    "openstad-component-forms": "git+ssh://git@github.com/Amsterdam/openstad-component-forms.git#v0.0.2",
+    "openstad-component-libs": "git+ssh://git@github.com/Amsterdam/openstad-component-libs.git#v0.0.2"
   }
 }
