@@ -1,5 +1,5 @@
 {
-  "name": "openstad-component-openstad-component-choices-guide",
+  "name": "openstad-component-choices-guide",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -36,14 +36,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Amsterdam/openstad-component-openstad-component-choices-guide.git"
+    "url": "git+https://github.com/Amsterdam/openstad-component-choices-guide.git"
   },
   "author": "Niels Vegter",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Amsterdam/openstad-component-openstad-component-choices-guide/issues"
+    "url": "https://github.com/Amsterdam/openstad-component-choices-guide/issues"
   },
-  "homepage": "https://github.com/Amsterdam/openstad-component-openstad-component-choices-guide#readme",
+  "homepage": "https://github.com/Amsterdam/openstad-component-choices-guide#readme",
   "dependencies": {
     "fingerprintjs2": "^2.1.0",
     "merge": "^1.2.1",
