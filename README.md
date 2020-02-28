@@ -12,11 +12,11 @@ Voor de omgevingsvisie is een alternatieve versie opgezet waarin de opties worde
 
 De keuzewijzer maakt deel uit van het OpenStad EcoSysteem en voronderstelt dat andere elementen daarvan ook zijn geinstalleerd. Voor de keuzewijzer is dat nu alleen de API server.
 
-```git clone git@github.com:Amsterdam/openstad-component-openstad-component-choices-guide.git```
+```git clone git@github.com:Amsterdam/openstad-component-choices-guide.git```
 
 of
 
-```npm i git+ssh://git@github.com:Amsterdam/openstad-component-openstad-component-choices-guide.git```
+```npm i git+ssh://git@github.com:Amsterdam/openstad-component-choices-guide.git```
 
 ## Build
 
@@ -136,14 +136,14 @@ Implementatie in een CMS is zo eenvoudig als het bovenstaande.
 Daarnaast zul je binnen de context van een CMS waarschijnlijk een ingelogde gebruiker hebben. Die wil je dan meesturen naar deze module, en dat doe je met twee config opties:
 
 ```
-  let config = {
-    api: {
-      'headers': { 'X-Authorization': '000' }
-    },
-    user: {
-      role: 'admin'
-    },
-  };
+{
+  api: {
+    headers: { 'X-Authorization': '000' }
+  },
+  user: {
+    role: 'admin'
+  },
+};
 ```
 
 Opgegeven API headers worden meegestuurd waarmee de API dus een gebruiker herkent.
@@ -251,9 +251,11 @@ choices: {
 ```
 
 # ToDo
-
 - optie 'Maak een nieuwe choices-guide' is er nog niet. Je kunt de hele keuzewijzer bewerken in deze component maar moet de keuzewijzer zelf met de hand in de database stoppen.
-- generieke reults pagina
+- generieke results pagina
+- results deelknoppen wil je laten verwijzen naar de results pagina. Ik denk met een hashtag.
+- results doorsturen is nu een zooitje en moet opnieuw uitgewerkt. Bijhouden in het overkoeplende ding en dat dan meesturen, denk ik.
+- hoe om te gaan met results als je meerdere questiongroups hebt
 - uitwerken edit forms en dat grotendeels in een eigen module stoppen
 - de voorkeur berekening is momenteel erg recht toe rechtaan. Ik denk dat dat in een echte stemwijzer wat complexer is. Zoek dat uit en pas het aan.
 - sticky moet uit de module gehaald

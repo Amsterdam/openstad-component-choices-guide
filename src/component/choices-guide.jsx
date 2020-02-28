@@ -28,6 +28,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
         url: null
       },
       sticky: null,
+      result: {},
     };
 
     self.config = merge.recursive(self.defaultConfig, self.config, props.config || {});
@@ -194,10 +195,12 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
   gotoResult() {
     let self = this;
     let values = Object.assign(self.state.values || {}, self.questionGroupElement.getAnswers());
+    let preferedChoice = self.choicesElement.getPreferedChoice();
     self.setState({
       status: 'result',
       values,
-      result: values
+      result: values,
+      preferedChoice,
     }, () => {
       self.submitResult()
       window.scrollTo(0,0)
@@ -294,7 +297,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
 
       contentHTML = (
         <div className="osc-choices-guide-content">
-          <OpenStadComponentChoicesGuideResult config={{ ...self.config }} data={{ choices: self.choices, result: self.state.result.values }} onFinished={self.hideEditForm} data={{ ...self.state }}>
+          <OpenStadComponentChoicesGuideResult config={{ ...self.config.result, type: self.config.choices.type }} data={{ choices: self.choices, result: self.state.result.values, preferedChoice: self.state.preferedChoice }} onFinished={self.hideEditForm} data={{ ...self.state }}>
             {choicesHTML}
           </OpenStadComponentChoicesGuideResult>
           <div className="osc-nav-bar">
@@ -308,49 +311,51 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
 
       let introHTML = null;
       if (self.state.status == 'init') {
-        introHTML = (
-          <div className="osc-intro">Laden...</div>
+        contentHTML = (
+          <div className="osc-choices-guide-content">
+            <div className="osc-intro">Laden...</div>
+          </div>
+        );
+      } else {
+
+        let choicesHTML = null;
+        choicesHTML = <OpenStadComponentChoices config={self.config.choices} choices={[...choices]} scores={{...self.state.scores}} answerDimensions={answerDimensions} firstAnswerGiven={ self.state.firstAnswerGiven ? true : false } ref={function(el) { self.choicesElement = el; }} key='choices'/>;
+
+        let questionGroupHTML = (
+          <div>
+            <OpenStadComponentQuestionGroup config={ { noOfQuestionsToShow: this.config.noOfQuestionsToShow, liveUpdatesFunction: self.liveUpdates } } data={ questionGroup } ref={function(el) { self.questionGroupElement = el; }} key={`group${self.state.currentQuestionsGroupIndex}`}/>
+          </div>
+        );
+
+        let editButtonHTML = null;
+        if (self.config.user && self.config.user.role && self.config.user.role == 'admin') {
+          editButtonHTML = <button className="osc-choices-guide-editbutton osc-edit" onClick={event => self.showEditForm()}>Bewerk keuzewijzer</button>;
+        }
+
+        let previousButtonHTML = null;
+        if ( self.state.status == 'result' || (  self.state.currentQuestionGroupIndex > 0 || self.state.currentQuestion > 0 ) ) {
+          previousButtonHTML = <div className="osc-previous-button" onClick={() => {self.gotoPreviousQuestion();}}>Terug</div>
+        } else if (self.config.beforeUrl) {
+          previousButtonHTML = <div className="osc-previous-button" onClick={() => { document.location.href = `${self.config.beforeUrl}` }}>Introductie</div>
+        }
+        
+        let nextButtonHTML = null;
+        if (self.state.status != 'init' && self.state.status != 'result') {
+          nextButtonHTML = <div className="osc-next-button" onClick={() => {self.gotoNextQuestion();}}>Volgende</div>
+        }
+        
+        contentHTML =  (
+          <div className="osc-choices-guide-content">
+            {editButtonHTML}
+            {choicesHTML}
+            {questionGroupHTML}
+            <div className="osc-nav-bar">
+              {previousButtonHTML}
+              {nextButtonHTML}
+            </div>
+          </div>
         );
       }
-
-      let choicesHTML = null;
-      choicesHTML = <OpenStadComponentChoices config={self.config.choices} choices={[...choices]} scores={{...self.state.scores}} answerDimensions={answerDimensions} firstAnswerGiven={ self.state.firstAnswerGiven ? true : false } ref={function(el) { self.choicesElement = el; }} key='choices'/>;
-
-      let questionGroupHTML = (
-        <div>
-          <OpenStadComponentQuestionGroup config={ { noOfQuestionsToShow: this.config.noOfQuestionsToShow, liveUpdatesFunction: self.liveUpdates } } data={ questionGroup } ref={function(el) { self.questionGroupElement = el; }} key={`group${self.state.currentQuestionsGroupIndex}`}/>
-        </div>
-      );
-
-      let editButtonHTML = null;
-      if (self.config.user && self.config.user.role && self.config.user.role == 'admin') {
-        editButtonHTML = <button className="osc-choices-guide-editbutton osc-edit" onClick={event => self.showEditForm()}>Bewerk keuzewijzer</button>;
-      }
-
-      let previousButtonHTML = null;
-      if ( self.state.status == 'result' || (  self.state.currentQuestionGroupIndex > 0 || self.state.currentQuestion > 0 ) ) {
-        previousButtonHTML = <div className="osc-previous-button" onClick={() => {self.gotoPreviousQuestion();}}>Terug</div>
-      } else if (self.config.beforeUrl) {
-        previousButtonHTML = <div className="osc-previous-button" onClick={() => { document.location.href = `${self.config.beforeUrl}` }}>Introductie</div>
-      }
-      
-      let nextButtonHTML = null;
-      if (self.state.status != 'init' && self.state.status != 'result') {
-        nextButtonHTML = <div className="osc-next-button" onClick={() => {self.gotoNextQuestion();}}>Volgende</div>
-      }
-      
-      contentHTML =  (
-        <div className="osc-choices-guide-content">
-          {editButtonHTML}
-          {introHTML}
-          {choicesHTML}
-          {questionGroupHTML}
-          <div className="osc-nav-bar">
-            {previousButtonHTML}
-            {nextButtonHTML}
-          </div>
-        </div>
-      );
 
     }
 

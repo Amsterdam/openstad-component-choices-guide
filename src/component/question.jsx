@@ -15,6 +15,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
 
     this.state = {
       value: 50,
+      isAnswered: false,
     };
 
     this.onChangeHandler = this.onChangeHandler.bind(this);
@@ -96,7 +97,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
       case 'continuous':
         selectorHTML =
           <div className="osc-question-selector">
-            <OpenStadComponentForms.Slider  min='0' max='100' step='1' value={value} className="osc-question-selector-slider" config={{}} onChange={ data => self.onChangeHandler(data) } ref={el => self.selector = el}/>
+            <OpenStadComponentForms.Slider min='0' max='100' step='1' value={value} className="osc-question-selector-slider" config={{}} touched={this.state.isAnswered} onChange={ data => self.onChangeHandler(data) } ref={el => self.selector = el}/>
             <div className="osc-question-selector-minlabel" dangerouslySetInnerHTML={{ __html: data.minLabel }}></div>
             <div className="osc-question-selector-maxlabel" dangerouslySetInnerHTML={{ __html: data.maxLabel }}></div>
           </div>
@@ -142,7 +143,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
           <div className="osc-question-selector">
             <div className="osc-question-selector-label-a">{labelA}</div>
             <div className="osc-question-selector-label-b">{labelB}</div>
-            <OpenStadComponentForms.Slider  min='0' max='100' step='1' value={value} className="osc-question-selector-slider" config={{}} onChange={ data => self.onChangeHandler(data) } ref={el => self.selector = el}/>
+            <OpenStadComponentForms.Slider  min='0' max='100' step='1' value={value} className="osc-question-selector-slider" config={{}} touched={this.state.isAnswered} onChange={ data => self.onChangeHandler(data) } ref={el => self.selector = el}/>
             <div className="osc-question-selector-minlabel" dangerouslySetInnerHTML={{ __html: data.minLabel }}></div>
             <div className="osc-question-selector-maxlabel" dangerouslySetInnerHTML={{ __html: data.maxLabel }}></div>
           </div>

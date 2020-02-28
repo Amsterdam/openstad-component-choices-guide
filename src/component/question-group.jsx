@@ -51,7 +51,7 @@ export default class OpenStadComponentQuestionGroup extends OpenStadComponent {
     let self = this;
     let values = Object.assign({}, self.state.values);
     self.props.data && self.props.data.questions.forEach( ( question, i ) => {
-      let element = self.questionElements.find( elem => elem.questionId == question.id );
+      let element = self.questionElements.find( elem => elem && elem.questionId == question.id );
       if (element) {
         if ( typeof element.getAnswer() != 'undefined' ) {
           values[question.id] = element.getAnswer();

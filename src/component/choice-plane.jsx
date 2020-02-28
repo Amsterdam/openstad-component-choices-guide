@@ -58,7 +58,7 @@ export default class OpenStadComponentChoicePlane extends OpenStadComponent {
       prefered = this.config.plane.bottomleft;
     }
     if ( top > baseSize && left > baseSize ) {
-      prefered = this.config.plane.topright;
+      prefered = this.config.plane.bottomright;
     }
 
     return prefered;
@@ -82,7 +82,6 @@ export default class OpenStadComponentChoicePlane extends OpenStadComponent {
   render() {
 
     let score = this.props.score;
-    console.log('++++', score);
 
     let baseSize = ( this.config.size / 2 ) || document.querySelector(`#${this.divId}`) && ( document.querySelector(`#${this.divId}`).offsetWidth / 2 ) || 90;
     let top = baseSize + ( typeof score.y == 'undefined' ? 0 : score.y ) * ( baseSize / 100 );

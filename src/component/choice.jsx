@@ -71,16 +71,15 @@ export default class OpenStadComponentChoice extends OpenStadComponent {
       this.dimensions.forEach((dimension) => {
         if (typeof myAnswer[dimension] == 'undefined') return;
         if (typeof givenAnswer[dimension] == 'undefined') return;
-        let def = myAnswer[dimension] || [0,100];
+        let def = typeof myAnswer[dimension] != 'undefined' ? myAnswer[dimension] : [0,100];
         if ( Array.isArray(def) ) {
           // percentage of range
           var range = def[1] - def[0];
-          
           return result[dimension] = def[0] + range * ( givenAnswer[dimension] / 100 );
         }
         if ( def == parseInt(def) ) {
-          // hard defined value
-          return result[dimension] = parseInt(def);
+          // defined value
+          return result[dimension] = 100 - Math.abs(parseInt(def) - givenAnswer[dimension]);
         }
         // default: percentage
         return result[dimension] = givenAnswer[dimension];

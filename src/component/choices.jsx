@@ -12,7 +12,7 @@ export default class OpenStadComponentChoices extends OpenStadComponent {
     super(props);
 
     this.defaultConfig = {
-      type: 'plane',
+      type: 'default',
       sticky: null,
     };
 
@@ -70,6 +70,24 @@ export default class OpenStadComponentChoices extends OpenStadComponent {
 
     self.setState({scores});
     return scores;
+
+  }
+
+  getPreferedChoice() {
+    //let scores = this.calculateScores();
+    let self = this;
+    let scores = self.state.scores;
+    switch (self.config.type) {
+      case 'plane':
+        // dan zou er maar 1 choice moeten zijn
+        return self.choiceElements[0].planeElement.getPreferedChoice(scores[`choice-${self.choiceElements[0].props.data.id}`]); // auw, dit moet dus anders
+        break;
+
+      default:
+        let first = Object.keys(scores).sort( (a,b) => scores[a].x < scores[b].x )[0];
+        return self.choiceElements.find( elem => elem && elem.config.divId == first );
+    }
+
 
   }
 
