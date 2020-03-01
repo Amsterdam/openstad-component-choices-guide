@@ -82,7 +82,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
 
     console.log(document.location.hash);
 
-    let selectedTab = self.state.selectedTab || self.props.data.preferedChoice.title || document.location.hash.replace(/^#/, ''); // zucht...
+    let selectedTab = self.state.selectedTab || ( self.props.data.preferedChoice && self.props.data.preferedChoice.title ) || document.location.hash.replace(/^#/, ''); // zucht...
     let useTab = selectedTab || Object.keys(self.config.tabs)[0];
     
     let imageHTML = null;
