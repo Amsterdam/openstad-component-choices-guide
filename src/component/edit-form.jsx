@@ -77,7 +77,6 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
   }
 
   handleFieldChange(data) {
-
     let currentTarget = this.state.currentTarget;
 
     Object.keys(data).forEach((key) => {
@@ -85,11 +84,9 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
     });
 
     this.setState({ currentTarget });
-
   }
 
   setCurrentForm(currentTarget) {
-
     let questionGroup;
     let choice;
     let question;
@@ -273,7 +270,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
       case 'choices-guide':
         title = 'Bewerk keuzewijzer';
         formfieldsHTML =
-          <div>
+          <div className="openstad-form">
             <h3>Titel</h3>
             <OpenStadComponentForms.InputWithCounter key="x1" config={{ inputType: 'input', minLength: 1, maxLength: 1000 }} value={self.state.currentTarget.title} onChange={ data => self.handleFieldChange({ title: data.value }) } ref={el => { self.titleField = el; }}/>
             <h3>Beschrijving</h3>
@@ -283,7 +280,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
           </div>
         ;
         overviewHTML =
-          <div>
+          <div className="openstad-form">
             <h4>Vraaggroepen</h4>
             { Object.keys(self.state.questionGroups).map((key, i) => {
 
@@ -294,10 +291,23 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
                     { Object.keys(questionGroup.questions).map((key, i) => {
                       let question = questionGroup.questions[key];
                       return (
-                        <li>{question.title} - {question.seqnr} - <a href="#" onClick={event => self.setCurrentForm({ what: 'question', questionGroupId: questionGroup.id, questionId: question.id })}>Bewerk</a></li>
+                        <li>
+                          {question.title} - {question.seqnr} -
+                          <a href="#" onClick={event => self.setCurrentForm({ what: 'question', questionGroupId: questionGroup.id, questionId: question.id })}>
+                            Bewerk
+                          </a>
+                          -
+                          <a href="#" onClick={event => self.deleteQuestion({questionId: question.id})}>
+                            Verwijder
+                          </a>
+                        </li>
                       );
                     })}
-                    <li><a href="#" onClick={event => self.setCurrentForm({ what: 'question', questionGroupId: questionGroup.id })}>Nieuwe vraag</a></li>
+                    <li>
+                      <a href="#" onClick={event => self.setCurrentForm({ what: 'question', questionGroupId: questionGroup.id })}>
+                        Nieuwe vraag
+                      </a>
+                    </li>
                   </ul>
                   ;
 
@@ -350,7 +360,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
       case 'question-group':
         title = 'Bewerk Vragengroep';
         formfieldsHTML =
-          <div>
+          <div className="openstad-form">
             <h3>Titel</h3>
             <OpenStadComponentForms.InputWithCounter config={{ inputType: 'input', minLength: 1, maxLength: 1000 }} value={self.state.currentTarget.title} onChange={ data => self.handleFieldChange({ title: data.value }) } ref={el => self.titleField = el}/>
             <h3>Beschrijving</h3>
@@ -372,7 +382,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
       case 'question':
         title = `Bewerk Vraag ${  self.state.currentTarget.questionId}`;
         formfieldsHTML =
-          <div>
+          <div className="openstad-form">
             <h3>Titel</h3>
             <OpenStadComponentForms.InputWithCounter config={{ inputType: 'input', minLength: 1, maxLength: 1000 }} value={self.state.currentTarget.title} onChange={ data => self.handleFieldChange({ title: data.value }) } ref={el => self.titleField = el}/>
             <h3>Beschrijving</h3>

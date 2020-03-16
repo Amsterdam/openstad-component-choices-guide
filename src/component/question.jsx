@@ -85,7 +85,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
     } else {
       isAnswered = true;
     }
-    
+
 
     let imageHTML = null;
     let images = data.images;
@@ -110,7 +110,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
           </div>
         ;
         break;
-        
+
       case 'a-to-b':
         let labelA = data.values && data.values.A && data.values.A.label || 'A';
         let labelB = data.values && data.values.B && data.values.B.label || 'B';
@@ -119,13 +119,13 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
         if (questionTextA && questionTextB) {
           questionHTML = (
             <div className="osc-question-description">
+              <div className="osc-question-description-text" dangerouslySetInnerHTML={{ __html: data.description }}></div>
               <div className="osc-question-description-text">
                 <div className="osc-question-description-label">{labelA}</div><div className="osc-question-description-labeled-text">{questionTextA}</div>
               </div>
               <div className="osc-question-description-text">
                 <div className="osc-question-description-label">{labelB}</div><div className="osc-question-description-labeled-text">{questionTextB}</div>
               </div>
-              <div className="osc-question-description-text" dangerouslySetInnerHTML={{ __html: data.description }}></div>
             </div>
           );
         }
@@ -134,6 +134,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
         if (questionImageA && questionImageB) {
           questionHTML = (
             <div className="osc-question-description">
+              <div className="osc-question-description-text" dangerouslySetInnerHTML={{ __html: data.description }}></div>
               <div className="osc-question-description-image-container osc-question-description-image-container-a">
                 <div className="osc-question-description-label osc-question-description-label-a">{labelA}</div>
                 <img className="osc-question-description-image" src={questionImageA.src}/>
@@ -141,11 +142,10 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
               <div className="osc-question-description-image-container osc-question-description-image-container-b">
                 <div className="osc-question-description-label osc-question-description-label-b">{labelB}</div>
                 <img className="osc-question-description-image" src={questionImageB.src}/>
-                <div className="osc-question-description-text" dangerouslySetInnerHTML={{ __html: data.description }}></div>
               </div>
             </div>
           );
-        }        
+        }
         selectorHTML =
           <div className="osc-question-selector">
             <div className="osc-question-selector-label-a">{labelA}</div>
@@ -208,7 +208,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
       <div id={self.props.config.divId} className={`osc-question osc-question-${data.type}${isError ? ' osc-error' : ''}`}>
         {imageHTML}
         <div className="osc-question-content" id={self.props.config.divId + '-content'}>
-          <h3 className="osc-question-title">{data.title}</h3>
+          <h3 className="osc-question-title"> {data.title}</h3>
           {questionHTML}
           {selectorHTML}
           {errorHTML}
