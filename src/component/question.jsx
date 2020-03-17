@@ -148,9 +148,25 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
         }
         selectorHTML =
           <div className="osc-question-selector">
-            <div className="osc-question-selector-label-a">{labelA}</div>
+            <div className="osc-question-selector-label-a">a:{labelA}</div>
             <div className="osc-question-selector-label-b">{labelB}</div>
-            <OpenStadComponentForms.Slider  min='0' max='100' step='1' value={value} className="osc-question-selector-slider" config={{}} touched={isAnswered} onChange={ data => self.onChangeHandler(data) } ref={el => self.selector = el}/>
+            <span
+              onClick={()=> {
+                this.setState({isAnswered: true, value: value});
+              }}
+            >
+              <OpenStadComponentForms.Slider
+                min='0'
+                max='100'
+                step='1'
+                value={value}
+                className="osc-question-selector-slider"
+                config={{}}
+                touched={isAnswered}
+                onChange={ data => self.onChangeHandler(data) }
+                ref={el => self.selector = el}
+              />
+            </span>
             <div className="osc-question-selector-minlabel" dangerouslySetInnerHTML={{ __html: data.minLabel }}></div>
             <div className="osc-question-selector-maxlabel" dangerouslySetInnerHTML={{ __html: data.maxLabel }}></div>
           </div>

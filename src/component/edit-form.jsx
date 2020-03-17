@@ -141,6 +141,43 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
     this.setState({ currentTarget });
   }
 
+  deleteQuestion ({questionId, choicesGuideId, questionGroupId}) {
+    url = `${self.config.api && self.config.api.url}/api/site/${self.config.siteId}/choicesguide/${choicesGuideId}/questiongroup/${questionGroupId}/question/${questionId}`;
+
+    fetch(url, {
+      method: 'DELETE',
+      headers: OpenStadComponentLibs.api.getHeaders(self.config)
+    })
+      .then( function(response) {
+        if (response.ok) {
+          return response.json();
+        }
+        throw response.text();
+      })
+      .then(function(json) {
+
+        // if (typeof self.config.onSubmit == 'function') {
+        //   self.config.onSubmit({ description: self.state.description });
+        // }
+        //
+        // self.setState({ description: '' }, () => {
+        //   if (self.config.argumentId) {
+        //     var event = new CustomEvent('reactionEdited', { detail: json });
+        //     document.dispatchEvent(event);
+        //   } else {
+        //     var event = new CustomEvent('newReactionStored', { detail: json });
+        //     document.dispatchEvent(event);
+        //   }
+        // });
+
+        self.fetchData();
+      })
+      .catch(function(error) {
+        error.then(function(messages) { return console.log(messages);} );
+        self.setState({ busy: false });
+      });
+  }
+
   submitForm() {
 
     let self = this;
@@ -281,7 +318,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
         ;
         overviewHTML =
           <div className="openstad-form">
-            <h4>Vraaggroepen</h4>
+            <h2>Vraaggroepen</h2>
             { Object.keys(self.state.questionGroups).map((key, i) => {
 
               let questionGroup = self.state.questionGroups[key];
@@ -297,7 +334,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
                             Bewerk
                           </a>
                           -
-                          <a href="#" onClick={event => self.deleteQuestion({questionId: question.id})}>
+                          <a href="#" onClick={event => self.deleteQuestion({questionId: question.id, questionGroupId: questionGroup.id, choicesGuideId: self.state.choicesGuideId})}>
                             Verwijder
                           </a>
                         </li>
@@ -418,15 +455,12 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
     return (
       <div id={this.divId} className={`osc-form${this.state.busy ? ' osc-busy' : ''}`}>
         <h2>{title}</h2>
-
         {formfieldsHTML}
         <br/>
         <br/>
         {backButtonHTML}
         {submitButtonHTML}
-
         {overviewHTML}
-
       </div>
     );
 
