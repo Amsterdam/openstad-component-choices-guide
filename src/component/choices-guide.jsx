@@ -46,7 +46,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
 
     self.liveUpdates = self.liveUpdates.bind(this);
     self.hideEditForm = self.hideEditForm.bind(this);
-    
+
   }
 
   componentDidMount(prevProps, prevState) {
@@ -93,7 +93,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
     // state.result = { "8": { "x": "77", "y": "77" }, "9": { "x": "23", "y": "23" }, "10": { "x": "81", "y": "81" }, "11": { "x": "83", "y": "83" }, "12": { "x": 0, "y": 0 } };
     // state.status = 'result';
     // return self.setState(state);
-    
+
     state.currentQuestionGroupIndex = 0;
     self.setState(state, () => {
       self.liveUpdates();
@@ -120,17 +120,18 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
   }
 
   gotoNextQuestion() {
-
     let self = this;
-
     let state = {};
+    
     state.values = Object.assign(self.state.values || {}, self.questionGroupElement.getAnswers());
     self.setState(state);
-
     self.choicesElement.calculateScores(state.values);
 
-    let { isReady, currentQuestion } = self.questionGroupElement.gotoNextQuestion();
-    self.setState({currentQuestion}, () => {
+    let nextQuestion = self.questionGroupElement.gotoNextQuestion();
+    let currentQuestion = nextQuestion && nextQuestion.currentQuestion ? nextQuestion.currentQuestion : null;
+    let isReady = nextQuestion && nextQuestion.isReady ? nextQuestion.isReady : null;
+
+    self.setState({currentQuestion: currentQuestion}, () => {
       if (isReady) {
         self.gotoNextGroup();
       } else {
@@ -189,7 +190,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
       this.liveUpdates();
       window.scrollTo(0,0)
     });
-    
+
   }
 
   gotoResult() {
@@ -212,7 +213,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
     let self = this;
 
     fingerprint.get(fingerprintComponents => {
-      
+
       let url = `${self.config.api && self.config.api.url }/api/site/${  self.config.siteId  }/choicesguide/${  self.config.choicesGuideId  }/result`;
       let headers = OpenStadComponentLibs.api.getHeaders(self.config);
       let body = {
@@ -287,7 +288,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
     } else if (self.state.status == 'result') {
 
       let previousButtonHTML = <div className="osc-previous-button" onClick={() => {self.gotoPreviousQuestion();}}>Terug</div>;
-      
+
       let nextButtonHTML = null;
       if (self.config.afterUrl) {
         nextButtonHTML = <div className="osc-next-button" onClick={() => { document.location.href = `${self.config.afterUrl}` }}>Volgende</div>
@@ -338,12 +339,12 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
         } else if (self.config.beforeUrl) {
           previousButtonHTML = <div className="osc-previous-button" onClick={() => { document.location.href = `${self.config.beforeUrl}` }}>Introductie</div>
         }
-        
+
         let nextButtonHTML = null;
         if (self.state.status != 'init' && self.state.status != 'result') {
           nextButtonHTML = <div className="osc-next-button" onClick={() => {self.gotoNextQuestion();}}>Volgende</div>
         }
-        
+
         contentHTML =  (
           <div className="osc-choices-guide-content">
             {editButtonHTML}
