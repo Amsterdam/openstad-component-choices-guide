@@ -37,7 +37,7 @@ export default class OpenStadComponentChoicePlane extends OpenStadComponent {
     };
 
   }
-  
+
   getPreferedChoice(score) {
 
     if (!score) return;
@@ -62,10 +62,10 @@ export default class OpenStadComponentChoicePlane extends OpenStadComponent {
     }
 
     return prefered;
-    
+
   }
 
-  
+
   getTitle(score) {
 
     if (!score) return;
@@ -76,7 +76,7 @@ export default class OpenStadComponentChoicePlane extends OpenStadComponent {
     this.setState({title});
     return title;
 
-    
+
   }
 
   render() {
@@ -106,12 +106,14 @@ export default class OpenStadComponentChoicePlane extends OpenStadComponent {
 
     return (
       <div id={this.divId} className="osc-choice-plane-plane" ref={function(el) { self.planePlaneElement = el;}}>
-        <div className="osc-choice-plane-background osc-bg-1">{topleftHTML}</div>
-        <div className="osc-choice-plane-background osc-bg-2">{toprightHTML}</div>
-        <div className="osc-choice-plane-background osc-bg-3">{bottomleftHTML}</div>
-        <div className="osc-choice-plane-background osc-bg-4">{bottomrightHTML}</div>
-        <div className="osc-point" style={{ top, left }}></div>
-        <div style={{ clear: 'both' }}></div>
+        <div className="osc-choice-plane-content">
+          <div className="osc-choice-plane-background osc-bg-1">{topleftHTML}</div>
+          <div className="osc-choice-plane-background osc-bg-2">{toprightHTML}</div>
+          <div className="osc-choice-plane-background osc-bg-3">{bottomleftHTML}</div>
+          <div className="osc-choice-plane-background osc-bg-4">{bottomrightHTML}</div>
+          <div className="osc-point" style={{ top, left }}></div>
+          <div style={{ clear: 'both' }}></div>
+        </div>
       </div>
     );
 
