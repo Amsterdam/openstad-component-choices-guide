@@ -25,6 +25,8 @@ export default class OpenStadComponentResult extends OpenStadComponent {
           ),
           image: { "src":"https://image-server.staging.openstadsdeel.nl/image/719fd5b8dc6953db41b187723d3fc5c9" },
           iframe:  { "src":"https://player.vimeo.com/video/360838768" },
+          shareText: 'Deel metrostad'
+
         },
         'moza&iuml;ekstad': {
           html: (
@@ -36,6 +38,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
             </div>
           ),
           image: { "src":"https://image-server.staging.openstadsdeel.nl/image/01484fc7716420635beab879658e00b1" },
+          shareText: 'Deel moza&iuml;ekstad'
         },
         'museumstad': {
           html: (
@@ -47,6 +50,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
             </div>
           ),
           image: { "src":"https://image-server.staging.openstadsdeel.nl/image/85ef5669d9a5db2f0ec2adb6310620be" },
+          shareText: 'museumstad'
         },
         'buurtenstad': {
           html: (
@@ -58,6 +62,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
             </div>
           ),
           image: { "src":"https://image-server.staging.openstadsdeel.nl/image/befd03bc1a415bd767f9912e3dcd18a8" },
+          shareText: 'buurtenstad'
         },
       }
     };
@@ -77,12 +82,10 @@ export default class OpenStadComponentResult extends OpenStadComponent {
   }
 
   render() {
-
-    let self = this;
-    let data = this.props.data;
-
-    let selectedTab = self.state.selectedTab || ( self.props.data.preferedChoice && self.props.data.preferedChoice.title ) || document.location.hash.replace(/^#/, ''); // zucht...
-    let useTab = selectedTab || Object.keys(self.config.tabs)[0];
+    const self = this;
+    const selectedTab = self.state.selectedTab || (self.props.data.preferedChoice && self.props.data.preferedChoice.title ) || document.location.hash.replace(/^#/, ''); // zucht...
+    const useTab = selectedTab || Object.keys(self.config.tabs)[0];
+    const resultShareText = self.config.tabs[useTab].shareText;
 
     let imageHTML, iframeHTML = '';
 
@@ -99,12 +102,15 @@ export default class OpenStadComponentResult extends OpenStadComponent {
 
     let iframes = self.config.tabs[useTab].iframe;
 
+
     if (iframes) {
       if (!Array.isArray(iframes)) iframes = [iframes];
       let iframe = iframes[0];
 
       iframeHTML = (
-        <iframe className="osc-iframe" src={iframe.src} width="100%" height="400" frameborder="0"/>
+        <div class="osc-result-resp-container">
+          <iframe className="osc-iframe" src={iframe.src} frameborder="0"/>
+        </div>
       );
     }
 
@@ -123,7 +129,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
     );
 
     let choicesHTML = null;
-    if (data.choices) {
+    if (self.props.data.choices) {
 
       switch (self.config.type) {
 
@@ -171,10 +177,10 @@ export default class OpenStadComponentResult extends OpenStadComponent {
             <h3>Deel jouw resultaat!</h3>
             Laat aan mede-Amsterdammers weten hoe jij de toekomst van de stad voor je ziet.
             <ul>
-			        <li><a className="osc-facebook" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${document.location.href}`}>Facebook</a></li>
-			        <li><a className="osc-twitter" target="_blank" href={`https://twitter.com/intent/tweet?text=${document.location.href}`}>Twitter</a></li>
-			        <li><a className="osc-email" target="_blank" href={`mailto:?subject=West Begroot 2020: Inclusief%20samen%20spelen%20in%20speeltuin%20De%20Gibraltar&amp;body=https://westbegroot.amsterdam.nl/stemmen%3FideaId%3D13571`}>Email</a></li>
-			        <li><a className="osc-whatsapp" target="_blank" href={`https://api.whatsapp.com/send?phone=&amp;text=${encodeURIComponent(document.location.href)}&amp;source=&amp;data=`}>WhatsApp</a></li>
+			        <li><a className="osc-facebook" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(document.location.href()}`}>Facebook</a></li>
+			        <li><a className="osc-twitter" target="_blank" href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(resultShareText + ': ' + document.location.href}`}>Twitter</a></li>
+			        <li><a className="osc-email" target="_blank" href={`mailto:?subject=${encodeURIComponent(resultText)};body=${encodeURIComponent(document.location.href)}`}>Email</a></li>
+			        <li><a className="osc-whatsapp" target="_blank" href={`https://api.whatsapp.com/send?phone=&amp;text=${encodeURIComponent(resultShareText + ': ' +document.location.href)}&amp;source=&amp;data=`}>WhatsApp</a></li>
             </ul>
           </div>
         </div>
