@@ -24,6 +24,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
             </div>
           ),
           image: { "src":"https://image-server.staging.openstadsdeel.nl/image/719fd5b8dc6953db41b187723d3fc5c9" },
+          iframe:  { "src":"https://image-server.staging.openstadsdeel.nl/image/719fd5b8dc6953db41b187723d3fc5c9" },
         },
         'moza&iuml;ekstad': {
           html: (
@@ -80,16 +81,16 @@ export default class OpenStadComponentResult extends OpenStadComponent {
     let self = this;
     let data = this.props.data;
 
-    console.log(document.location.hash);
-
     let selectedTab = self.state.selectedTab || ( self.props.data.preferedChoice && self.props.data.preferedChoice.title ) || document.location.hash.replace(/^#/, ''); // zucht...
     let useTab = selectedTab || Object.keys(self.config.tabs)[0];
-    
+
     let imageHTML = null;
     let images = self.config.tabs[useTab].image;
+
     if (images) {
       if (!Array.isArray(images)) images = [images];
       let image = images[0];
+
       imageHTML = (
         <img className="osc-image" src={image.src}/>
       );
@@ -101,6 +102,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
           { Object.keys(self.config.tabs).map((tab) => {
             return <div className={ 'osc-tab' + ( tab == selectedTab ? ' osc-active' : '' ) } onClick={ () => self.setSelectedTab(tab) } key={`osc-tab-${tab}`} dangerouslySetInnerHTML={{ __html: tab }}></div>;
           })}
+          
         </div>
         {imageHTML}
         {self.config.tabs[useTab].html}
@@ -130,17 +132,26 @@ export default class OpenStadComponentResult extends OpenStadComponent {
 
           <h3>Jouw resultaat</h3>
           <div>
-            Geweldig, je bent er bijna! Lees hieronder meer over jouw voorkeur, of ga terug om je voorkeur aan te passen. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel nulla eget justo imperdiet eleifend. Sed molestie lectus in pulvinar aliquam. Nunc eu volutpat magna, in molestie enim. Suspendisse vel maximus purus. Morbi maximus feugiat nibh, quis faucibus quam eleifend vel. Vivamus non tellus et massa aliquet tempus.
+            Geweldig, je bent er bijna!
+            Lees hieronder meer over jouw voorkeur, of ga terug om je voorkeur aan te passen.
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Maecenas vel nulla eget justo imperdiet eleifend.
+            Sed molestie lectus in pulvinar aliquam.
+            Nunc eu volutpat magna, in molestie enim. Suspendisse vel maximus purus. Morbi maximus feugiat nibh, quis faucibus quam eleifend vel. Vivamus non tellus et massa aliquet tempus.
           </div>
 
           <h4>Jouw favoriete scenario</h4>
+
           {choicesHTML}
 
           {explanationHTML}
 
           <div className="osc-newsletter">
             <h3>Wil je op de hoogte blijven van de omgevingsvisie?</h3>
-            <strong>&gt; Schrijf je in voor de nieuwsbrief</strong>
+            <a href="#newsletter">
+              <strong>&gt; Schrijf je in voor de nieuwsbrief</strong>
+            </a>
           </div>
 
           <div className="osc-sharebuttons">
@@ -153,8 +164,6 @@ export default class OpenStadComponentResult extends OpenStadComponent {
 			        <li><a className="osc-whatsapp" target="_blank" href={`https://api.whatsapp.com/send?phone=&amp;text=${encodeURIComponent(document.location.href)}&amp;source=&amp;data=`}>WhatsApp</a></li>
             </ul>
           </div>
-          
-          
         </div>
       </div>
     );

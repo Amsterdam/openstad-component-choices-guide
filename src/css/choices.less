@@ -51,13 +51,16 @@
     .osc-choices-default {
     }
   }
-  
-  &.osc-accordeon {
 
+  &.osc-accordeon {
     margin-top: 0;
 		background-color: #f3f3f3;
     border: none;
 
+    &.sticky {
+      box-shadow: #00000080 0 4px 4px 0px;
+    }
+    
 		.osc-accordeon-button {
       padding: 20px;
       background: none;
@@ -67,7 +70,7 @@
         padding-right: 35px;
         cursor: pointer;
       }
-      
+
     }
 
 		.osc-accordeon-content {
@@ -121,7 +124,7 @@
 	    }
     }
 
-    
+
   }
 
 }
