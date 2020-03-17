@@ -17,19 +17,19 @@ export default class OpenStadComponentResult extends OpenStadComponent {
         'metrostad': {
           html: (
             <div id="accordeon-1" className="osc-accordeon osc-closed">
-              <div onClick={ () =>  { var element = document.getElementById('accordeon-1'); console.log('==', element); if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario metrostad</div>
+              <div onClick={ () =>  { var element = document.getElementById('accordeon-1');  if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario metrostad</div>
               <div className="osc-accordeon-content">
                 Deze tekst is er nog niet.
               </div>
             </div>
           ),
           image: { "src":"https://image-server.staging.openstadsdeel.nl/image/719fd5b8dc6953db41b187723d3fc5c9" },
-          iframe:  { "src":"https://image-server.staging.openstadsdeel.nl/image/719fd5b8dc6953db41b187723d3fc5c9" },
+          iframe:  { "src":"https://player.vimeo.com/video/360838768" },
         },
         'moza&iuml;ekstad': {
           html: (
             <div id="accordeon-1" className="osc-accordeon osc-closed">
-              <div onClick={ () =>  { var element = document.getElementById('accordeon-1'); console.log('==', element); if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario moza&iuml;ekstad</div>
+              <div onClick={ () =>  { var element = document.getElementById('accordeon-1'); if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario moza&iuml;ekstad</div>
               <div className="osc-accordeon-content">
                 Deze tekst is er nog niet.
               </div>
@@ -40,7 +40,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
         'museumstad': {
           html: (
             <div id="accordeon-1" className="osc-accordeon osc-closed">
-              <div onClick={ () =>  { var element = document.getElementById('accordeon-1'); console.log('==', element); if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario museumstad</div>
+              <div onClick={ () =>  { var element = document.getElementById('accordeon-1'); if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario museumstad</div>
               <div className="osc-accordeon-content">
                 Deze tekst is er nog niet.
               </div>
@@ -51,7 +51,7 @@ export default class OpenStadComponentResult extends OpenStadComponent {
         'buurtenstad': {
           html: (
             <div id="accordeon-1" className="osc-accordeon osc-closed">
-              <div onClick={ () =>  { var element = document.getElementById('accordeon-1'); console.log('==', element); if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario buurtenstad</div>
+              <div onClick={ () =>  { var element = document.getElementById('accordeon-1'); if( element.className.match(' osc-closed') ){ element.className = element.className.replace(' osc-closed', ' osc-open');  } else { element.className = element.className.replace(' osc-open', ' osc-closed'); } } } className="osc-accordeon-button">Lees meer over scenario buurtenstad</div>
               <div className="osc-accordeon-content">
                 Deze tekst is er nog niet.
               </div>
@@ -84,7 +84,8 @@ export default class OpenStadComponentResult extends OpenStadComponent {
     let selectedTab = self.state.selectedTab || ( self.props.data.preferedChoice && self.props.data.preferedChoice.title ) || document.location.hash.replace(/^#/, ''); // zucht...
     let useTab = selectedTab || Object.keys(self.config.tabs)[0];
 
-    let imageHTML = null;
+    let imageHTML, iframeHTML = '';
+
     let images = self.config.tabs[useTab].image;
 
     if (images) {
@@ -96,14 +97,26 @@ export default class OpenStadComponentResult extends OpenStadComponent {
       );
     }
 
+    let iframes = self.config.tabs[useTab].iframe;
+
+    if (iframes) {
+      if (!Array.isArray(iframes)) iframes = [iframes];
+      let iframe = iframes[0];
+
+      iframeHTML = (
+        <iframe className="osc-iframe" src={iframe.src} width="100%" height="400" frameborder="0"/>
+      );
+    }
+
     let explanationHTML = (
       <div className="osc-explanation">
         <div className="osc-tabs">
           { Object.keys(self.config.tabs).map((tab) => {
             return <div className={ 'osc-tab' + ( tab == selectedTab ? ' osc-active' : '' ) } onClick={ () => self.setSelectedTab(tab) } key={`osc-tab-${tab}`} dangerouslySetInnerHTML={{ __html: tab }}></div>;
           })}
-          
+
         </div>
+        {iframeHTML}
         {imageHTML}
         {self.config.tabs[useTab].html}
       </div>
