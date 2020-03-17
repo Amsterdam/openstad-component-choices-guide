@@ -136,11 +136,9 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
             <div className="osc-question-description">
               <div className="osc-question-description-text" dangerouslySetInnerHTML={{ __html: data.description }}></div>
               <div className="osc-question-description-image-container osc-question-description-image-container-a">
-                <div className="osc-question-description-label osc-question-description-label-a">{labelA}</div>
                 <img className="osc-question-description-image" src={questionImageA.src}/>
               </div>
               <div className="osc-question-description-image-container osc-question-description-image-container-b">
-                <div className="osc-question-description-label osc-question-description-label-b">{labelB}</div>
                 <img className="osc-question-description-image" src={questionImageB.src}/>
               </div>
             </div>
