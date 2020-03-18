@@ -142,7 +142,8 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
   }
 
   deleteQuestion ({questionId, choicesGuideId, questionGroupId}) {
-    url = `${self.config.api && self.config.api.url}/api/site/${self.config.siteId}/choicesguide/${choicesGuideId}/questiongroup/${questionGroupId}/question/${questionId}`;
+    const self = this;
+    const url = `${self.config.api && self.config.api.url}/api/site/${self.config.siteId}/choicesguide/${choicesGuideId}/questiongroup/${questionGroupId}/question/${questionId}`;
 
     fetch(url, {
       method: 'DELETE',
@@ -324,7 +325,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
               let questionGroup = self.state.questionGroups[key];
 
               let questionsHTML =
-                  <ul>
+                  <ul class="question-edit-list">
                     { Object.keys(questionGroup.questions).map((key, i) => {
                       let question = questionGroup.questions[key];
                       return (
@@ -341,9 +342,9 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
                       );
                     })}
                     <li>
-                      <a href="#" onClick={event => self.setCurrentForm({ what: 'question', questionGroupId: questionGroup.id })}>
+                      <button href="#" className="btn btn-primary" onClick={event => self.setCurrentForm({ what: 'question', questionGroupId: questionGroup.id })}>
                         Nieuwe vraag
-                      </a>
+                      </button>
                     </li>
                   </ul>
                   ;
@@ -362,9 +363,15 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
 
               return (
                 <div>
-                  {questionGroup.title} - {questionGroup.seqnr} - <a href="#" onClick={event => self.setCurrentForm({ what: 'question-group', questionGroupId: questionGroup.id })}>Bewerk</a>
+                  <h3>
+                    Vraaggroep: <br />
+                    <small> {questionGroup.title} - {questionGroup.seqnr} - <a href="#" onClick={event => self.setCurrentForm({ what: 'question-group', questionGroupId: questionGroup.id })}>Bewerk</a> </small>
+                  </h3>
+                  <h4> Vragen </h4>
                   {questionsHTML}
                   {choicesHTML}
+                  <hr />
+                  <br />
                 </div>
               );
             })}
@@ -379,7 +386,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
       case 'choice':
         title = 'Bewerk Keuze';
         formfieldsHTML =
-          <div>
+          <div class="osc-form">
             <h3>Titel</h3>
             <OpenStadComponentForms.InputWithCounter config={{ inputType: 'input', minLength: 1, maxLength: 1000 }} value={self.state.currentTarget.title} onChange={ data => self.handleFieldChange({ title: data.value }) } ref={el => self.titleField = el}/>
             <h3>Beschrijving</h3>

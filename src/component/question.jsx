@@ -93,7 +93,12 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
       if (!Array.isArray(images)) images = [images];
       let image = images[0];
       imageHTML = (
-        <img className="osc-question-image" src={image.src}/>
+        <div
+          className="osc-question-image"
+          style={{
+            backgroundImage: `url(${image.src})`,
+          }}
+        />
       );
     }
 
@@ -103,7 +108,7 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
 
       case 'continuous':
         selectorHTML =
-          <div className="osc-question-selector">
+          <div className="osc-question-selector clearfix">
             <OpenStadComponentForms.Slider min='0' max='100' step='1' value={value} className="osc-question-selector-slider" config={{}} touched={isAnswered} onChange={ data => self.onChangeHandler(data) } ref={el => self.selector = el}/>
             <div className="osc-question-selector-minlabel" dangerouslySetInnerHTML={{ __html: data.minLabel }}></div>
             <div className="osc-question-selector-maxlabel" dangerouslySetInnerHTML={{ __html: data.maxLabel }}></div>
@@ -135,18 +140,24 @@ export default class OpenStadComponentQuestion extends OpenStadComponent {
           questionHTML = (
             <div className="osc-question-description">
               <div className="osc-question-description-text" dangerouslySetInnerHTML={{ __html: data.description }}></div>
-              <div className="osc-question-description-image-container osc-question-description-image-container-a">
-                <img className="osc-question-description-image" src={questionImageA.src}/>
-              </div>
-              <div className="osc-question-description-image-container osc-question-description-image-container-b">
-                <img className="osc-question-description-image" src={questionImageB.src}/>
-              </div>
+              <div
+                className="osc-question-description-image-container osc-question-description-image-container-a"
+                style={{
+                  backgroundImage: `url(${questionImageA.src})`,
+                }}
+              />
+              <div
+                className="osc-question-description-image-container osc-question-description-image-container-b"
+                style={{
+                  backgroundImage: `url(${questionImageB.src})`,
+                }}
+              />
             </div>
           );
         }
         selectorHTML =
-          <div className="osc-question-selector">
-            <div className="osc-question-selector-label-a">a:{labelA}</div>
+          <div className="osc-question-selector clearfix">
+            <div className="osc-question-selector-label-a">{labelA}</div>
             <div className="osc-question-selector-label-b">{labelB}</div>
             <span
               onClick={()=> {

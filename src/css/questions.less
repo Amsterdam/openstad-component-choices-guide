@@ -13,7 +13,12 @@
     .osc-question-image {
       width: 100%;
       height: 200px;
-      object-fit: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
 
       @media @phone {
         width: 100%;
@@ -37,13 +42,12 @@
     }
 
     .osc-question-selector {
-
-      overflow:hidden;
+      //overflow:hidden;
 
       .osc-question-selector-slider {
         clear: both;
-        width: 100%;
-        margin: 10px 0 10px 0;
+        width: auto;
+        margin: 10px -10px 10px -10px;
       }
 
       .osc-question-selector-minlabel {
@@ -60,11 +64,9 @@
         max-width: 40%;
         text-align: right;
       }
-
     }
 
     .osc-radio-container {
-
       margin-bottom: 10px;
       overflow: hidden;
 
@@ -136,7 +138,12 @@
       .osc-question-description-image-container {
         width: calc( 50% - 10px );
         height: 210px;
-        object-fit: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
       }
 
       .osc-question-description-image-container-a {
@@ -154,23 +161,18 @@
 
       }
 
-      .osc-question-description-image {
-        width: 100%;
-        height: 210px;
-        object-fit: cover;
-      }
 
       .osc-question-selector-label-a {
         display: inline-block;
         float: left;
-        margin-left: 17px;
+        margin-left: 7px;
         font-weight: 600;
       }
 
       .osc-question-selector-label-b {
         display: inline-block;
         float: right;
-        margin-right: 17px;
+        margin-right: 7px;
         font-weight: 600;
       }
 

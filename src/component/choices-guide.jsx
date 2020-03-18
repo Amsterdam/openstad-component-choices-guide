@@ -122,7 +122,7 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
   gotoNextQuestion() {
     let self = this;
     let state = {};
-    
+
     state.values = Object.assign(self.state.values || {}, self.questionGroupElement.getAnswers());
     self.setState(state);
     self.choicesElement.calculateScores(state.values);
@@ -266,16 +266,6 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
       }
     }
 
-    let imageHTML = null;
-    let images = self.state.images;
-    if (images) {
-      if (!Array.isArray(images)) images = [images];
-      let image = images[0];
-      imageHTML = (
-        <img className="osc-image" src={image.src}/>
-      );
-    }
-
     let contentHTML = null;
     if (self.state.editMode) { // todo: moet een status worden
 
@@ -362,7 +352,6 @@ export default class OpenStadComponentChoicesGuide extends OpenStadComponent {
 
     return (
         <div id={this.divId} className="osc-choices-guide">
-          {imageHTML}
           {contentHTML}
         </div>
       );

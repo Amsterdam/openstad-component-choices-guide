@@ -4,12 +4,59 @@
 @import (optional, reference) '../../node_modules/openstad-component-forms/src/css/default.less';
 @import (optional, reference) '../../../openstad-component-forms/src/css/default.less';
 
-
-
-
 @import '../../node_modules/openstad-component/src/css/default.less';
 @import '../../node_modules/openstad-component-forms/src/css/default.less';
 @import '../../node_modules/openstad-component/src/css/tabs.less';
+@import '../../node_modules/openstad-component/src/css/sharebuttons.less';
+
+
+.osc-tabs {
+    width: 100%;
+    height: 44px;
+    margin-top: 40px;
+    border-bottom: 2px solid #e6e6e6;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.osc-tabs .osc-tab {
+    display: inline-block;
+    overflow: hidden;
+    height: 44px;
+    margin-right: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 44px;
+    cursor: pointer;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+/*
+  Fixed some issues with IE slider
+ */
+.osc-choices-guide-content .osc-slider-container .osc-slider-input-range {
+  height: 48px;
+  padding: 0;
+  top: -3px;
+}
+
+.osc-slider-input-range::-ms-fill-lower {
+    background: transparent;
+}
+
+.osc-slider-input-range::-ms-fill-upper {
+    background: transparent;
+}
+
 
 @import 'accordeon'; // TODO: de accordeon moet naar generieke elementen
 
