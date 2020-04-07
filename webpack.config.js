@@ -1,10 +1,10 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+ 
 module.exports = {
 
-	devtool: 'eval-source-map',
+	devtool: 'source-map',
 	// mode: 'production',
 	mode: 'development',
 

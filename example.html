@@ -15,9 +15,9 @@
 
          divId: "choices-guide",
 
-         siteId: 14,
-         choicesGuideId: 4,
-         noOfQuestionsToShow: 10,
+         siteId: 1,
+         choicesGuideId: 1,
+         noOfQuestionsToShow: 1,
 
          choices: {
            type: 'plane',
@@ -29,13 +29,15 @@
          beforeUrl: '/openstad/choices-guide/example.html?before',
          afterUrl: '/openstad/choices-guide/example.html?after',
 
+         loginUrl: "http://APIURL/oauth/site/1/login?redirectUrl=http://WEBSITEURL",
+
          "user": {
-           role: 'admin'
+           // role: 'admin'
          },
          
          "api": {
-           "url": "http://openstad-api.ergens.nl",
-           "headers": { "X-Authorization": "xxx" }
+           "url": "http://APIURL",
+           "headers": { "X-Authorization": "Bearer ACCRESSTOKEN" }
          },
 
        };
