@@ -48,7 +48,9 @@ export default class OpenStadComponentChoice extends OpenStadComponent {
   }
 
   getTitle(score) {
-    return this.planeElement ? this.planeElement.getTitle(score) : this.props.data && this.props.data.title;
+    return this.planeElement ?
+      this.planeElement.getTitle(score) :
+      this.props.data && this.props.data.title;
   }
   
   calculateScore(answers) {
@@ -127,8 +129,10 @@ export default class OpenStadComponentChoice extends OpenStadComponent {
         scoreHTML = (
           <div className="osc-choice-default">
             <h4>{self.props.data.title}</h4>
-            {self.props.data.description}<br/>
-            <div>Score: {self.state.score.x}&nbsp;</div>
+            <div className="osc-choice-bar">
+              <div className="osc-choice-bar-mask"></div>
+              <div className="osc-choice-bar-progress" style={{ width: ( self.state.score.x || 0 ) + '%' }}></div>
+            </div>
           </div>
         );
 

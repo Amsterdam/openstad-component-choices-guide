@@ -150,12 +150,30 @@
   margin: 0;
   padding: 0;
 }
+.osc-choices-guide .osc-choices-container ul.osc-choices .osc-choice-default .osc-choice-bar {
+  position: relative;
+  height: 14px;
+  width: 100%;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.osc-choices-guide .osc-choices-container ul.osc-choices .osc-choice-default .osc-choice-bar .osc-choice-bar-progress {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 14px;
+  background-color: #bed200;
+  border-radius-top-left: 7px;
+}
 .osc-choices-guide .osc-choices-container.osc-accordeon {
   margin-top: 0;
   background-color: #f3f3f3;
   border: none;
 }
 .osc-choices-guide .osc-choices-container.osc-accordeon .osc-accordeon-button {
+  font-weight: normal;
   padding: 20px;
   background: none;
   cursor: default;
@@ -823,13 +841,26 @@
 }
 .osc-accordeon .osc-accordeon-content {
   padding: 15px;
+  font-size: 14px;
   border: 3px solid #e6e6e6;
   border-top: none;
+}
+.osc-accordeon .osc-accordeon-content h2 {
+  margin: 15px 0 0 0;
+  padding: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+.osc-accordeon .osc-accordeon-content h3 {
+  margin: 15px 0 0 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 800;
 }
 .osc-accordeon .osc-accordeon-content h4 {
   margin: 15px 0 0 0;
   padding: 0;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 800;
 }
 .osc-accordeon.osc-open .osc-accordeon-button {

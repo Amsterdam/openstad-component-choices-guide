@@ -91,20 +91,16 @@ export default class OpenStadComponentChoices extends OpenStadComponent {
 
   }
 
-  updateTitle() {
-    let self = this;
-    let titleHTML = 'Je hebt nog geen keuze gemaakt';
-    this.setState({ title: titleHTML })
-  }
-
   render() {
 
     let self = this;
 
-    let title = 'Beantwoord een vraag om te beginnen';
+    // let title = 'Beantwoord een vraag om te beginnen';
+    let title = '<b>Je hebt nog geen keuze gemaakt</b>';
     if ( self.props.firstAnswerGiven && self.choiceElements && self.choiceElements.length ) {
-      let choiceElement = self.choiceElements.sort( (a,b) => a.getScore() < b.getScore() )[0];
-      title = choiceElement.getTitle(self.state.scores[choiceElement.config.divId]) || title;
+      // let choiceElement = self.choiceElements.sort( (a,b) => a.getScore() < b.getScore() )[0];
+      let choiceElement = self.getPreferedChoice();
+      title = '<b>Jouw voorkeur: </b>' + choiceElement.getTitle(self.state.scores[choiceElement.config.divId]) || title;
     }
 
     return (

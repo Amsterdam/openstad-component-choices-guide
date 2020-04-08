@@ -48,8 +48,30 @@
     .osc-choice {
     }
 
-    .osc-choices-default {
+    .osc-choice-default {
+
+      .osc-choice-bar {
+
+        position: relative;
+        height: 14px;
+        width: 100%;
+        margin-top: 10px;
+        background-color: white;
+        border-radius: 7px;
+        overflow: hidden;
+
+        .osc-choice-bar-progress {
+          position: relative;
+          top: 0;
+          left: 0;
+          height: 14px;
+          background-color: #bed200;
+          border-radius-top-left: 7px;
+        }
+
+      }
     }
+
   }
   
   &.osc-accordeon {
@@ -59,6 +81,7 @@
     border: none;
 
 		.osc-accordeon-button {
+      font-weight: normal;
       padding: 20px;
       background: none;
       cursor: default;

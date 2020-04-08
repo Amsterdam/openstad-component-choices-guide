@@ -292,7 +292,7 @@ export default class OpenStadComponentChoicesGuideForm extends OpenStadComponent
                       let question = questionGroup.questions[key];
                       return (
                         <li>
-                          {question.title} - {question.seqnr} -
+                          ({question.id}) - {question.title} - {question.seqnr} -
                           <a href="#" onClick={event => self.setCurrentForm({ what: 'question', questionGroupId: questionGroup.id, questionId: question.id })}>
                             Bewerk
                           </a>
