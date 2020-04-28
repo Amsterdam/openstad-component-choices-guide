@@ -1,3 +1,5 @@
+# Deze module is deprecated. Verschillende modules, waaronder deze, zijn samengevoegd in https://github.com/Amsterdam/openstad-components/
+
 # Wat is het
 
 Dit is de OpenStad Keuzewijzer.
